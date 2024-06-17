@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget App</title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="aside">
+      <div class="heading">
+        <img src="asset/svgviewer-png-output (1).png" alt="img" />
+      </div>
+      <div class="top">
+        <div class="profile">
+          <div class="image"><i class="fa-solid fa-user"></i></div>
+          <p>varun</p>
+        </div>
+        <div class="menu">
+          <div class="dashboard active-border-aside">
+            <img src="asset/dashboard.png" alt="img" />
+            <p>Dashboard</p>
+          </div>
+          <div class="ai">
+            <img src="asset/ai.png" alt="img" />
+            <p>Explore AI</p>
+          </div>
+          <div class="tax">
+            <img src="asset/taxes.png" alt="img" />
+            <p>Tax Calculation</p>
+          </div>
+          <div class="transaction">
+            <img src="asset/transaction.png" alt="img" />
+            <p>View All Transactions</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <p>Sign Out</p>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="container">
+        <div class="sub-container">
+          <!-- Budget -->
+          <div class="total-amount-container">
+            <h3>Budget</h3>
+            <p class="hide error" id="budget-error">
+              Value cannot be empty or negative
+            </p>
+            <input
+              type="number"
+              id="total-amount"
+              placeholder="Enter Total Amount"
+            />
+            <button class="submit" id="total-amount-button">Set Budget</button>
+          </div>
+
+          <!-- Expenditure -->
+          <div class="user-amount-container">
+            <h3>Expenses</h3>
+            <p class="hide error" id="product-title-error">
+              Values cannot be empty
+            </p>
+            <input
+              type="text"
+              class="product-title"
+              id="product-title"
+              placeholder="Enter Title of Product"
+            />
+            <input
+              type="number"
+              id="user-amount"
+              placeholder="Enter Cost of Product"
+            />
+            <button class="submit" id="check-amount">Check Amount</button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <div class="chart-and-content-container">
+          <div class="chart">
+            <h3>Budget v/s Expenditure Chart</h3>
+            <canvas id="myChart"></canvas>
+          </div>
+          <div class="expense-content flex-space-rem">
+            <h3>Overall Statistics</h3>
+            <div>
+              <p>Total Budget</p>
+              <p id="amount" class="stats">₹0</p>
+            </div>
+            <div>
+              <p>Expenses</p>
+              <p id="expenditure-value" class="stats">₹0</p>
+            </div>
+            <div>
+              <p>Balance</p>
+              <p id="balance-amount" class="stats">₹0</p>
+            </div>
+          </div>
+        </div>
+        <!-- Output -->
+        <div class="output-container flex-space div-display">
+          <div>
+            <p>Total Budget</p>
+            <span id="amount-display">₹0</span>
+          </div>
+          <div>
+            <p>Expenses</p>
+            <span id="expenditure-value-display">₹0</span>
+          </div>
+          <div>
+            <p>Balance</p>
+            <span id="balance-amount-display">₹0</span>
+          </div>
+        </div>
+      </div>
+      <!-- List -->
+      <div class="list">
+        <h3>Expense List</h3>
+        <div class="list-container" id="list"></div>
+      </div>
+      <!-- <div class="chart">
+        <h3>Budget v/s Expenditure Chart</h3>
+        <canvas id="myChart"></canvas>
+      </div> -->
+    </div>
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
