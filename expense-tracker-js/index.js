@@ -23,6 +23,9 @@ const ai = document.querySelector(".ai");
 const signout = document.querySelector(".bottom");
 const successful_login = document.querySelector(".successful-login");
 const userLoggedIn = document.querySelector(".profile p");
+const pay_now = document.querySelector("#pay-now");
+const tax_value = document.querySelector(".stats");
+
 let idIndex = 0;
 let tempAmount = 0;
 let obj = JSON.parse(localStorage.getItem("currentUser"));
@@ -123,7 +126,6 @@ taxSubmit.addEventListener("click", () => {
   if (temp_income !== "" && income >= 0) {
     document.querySelector("#tax-error").classList.add("hide");
     const taxslab = document.querySelector("#tax-slab");
-    const tax_value = document.querySelector(".stats");
     taxslab.disabled = false;
     if (income <= 300000) {
       taxslab.value = "0%";
@@ -338,7 +340,7 @@ signout.addEventListener("click", () => {
   successful_login.querySelector("p").innerText = "Successfully Logged Out";
   setTimeout(() => {
     successful_login.style.display = "none";
-    window.location.href = "../login-form/signup.html";
+    window.location.href = "../index.html";
   }, 2000);
 });
 
