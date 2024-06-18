@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./asset/dashboard.png"
+      type="image/x-icon"
+    />
     <title>Budget App</title>
     <!-- Font Awesome Icons -->
     <link
@@ -18,12 +23,14 @@
   </head>
   <body>
     <div class="aside">
-      <div class="heading">
+      <div class="heading" style="cursor: pointer">
         <img src="asset/svgviewer-png-output (1).png" alt="img" />
       </div>
       <div class="top">
         <div class="profile">
-          <div class="image"><i class="fa-solid fa-user"></i></div>
+          <div class="image" style="cursor: pointer">
+            <i class="fa-solid fa-user"></i>
+          </div>
           <p>varun</p>
         </div>
         <div class="menu">
@@ -133,9 +140,15 @@
         </div>
       </div>
       <!-- List -->
-      <div class="list">
+      <div class="list" style="text-decoration: underline">
         <h3>Expense List</h3>
         <div class="list-container" id="list"></div>
+      </div>
+    </div>
+    <div class="successful-login">
+      <div class="login-done">
+        <p>Successfully Signed Up</p>
+        <img src="./asset/tick2.gif" alt="gif" />
       </div>
     </div>
     <!-- Script -->

@@ -17,6 +17,13 @@ const graphLabels = [];
 const graphData = [];
 const color = [];
 const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
+const transaction = document.querySelector(".transaction");
+const dashboard = document.querySelector(".dashboard");
+const ai = document.querySelector(".ai");
+const signout = document.querySelector(".bottom");
+const successful_login = document.querySelector(".successful-login");
+
+let idIndex = 0;
 let tempAmount = 0;
 
 //Set Budget Part
@@ -134,8 +141,9 @@ const listCreator = (expenseName, expenseValue) => {
   sublistContent.classList.add(
     "sublist-content",
     "flex-space",
-    `${Number(expenseValue) < 0 ? "border-left-red" : "border-left-green"}`
+    `${Number(expenseValue) >= 0 ? "border-left-red" : "border-left-green"}`
   );
+  sublistContent.id = `${idIndex++}`;
   list.appendChild(sublistContent);
   sublistContent.innerHTML = `<p class="product">${expenseName}</p><p class="amount">${expenseValue}</p>`;
   let editButton = document.createElement("button");
@@ -152,6 +160,8 @@ const listCreator = (expenseName, expenseValue) => {
   });
   sublistContent.appendChild(editButton);
   sublistContent.appendChild(deleteButton);
+  expenseArrTemp.push(sublistContent);
+  expenseArrTotal.push(sublistContent);
   document.getElementById("list").appendChild(sublistContent);
 };
 
@@ -194,7 +204,6 @@ const colorGenerator = () => {
     let num = Math.trunc(Math.random() * 16);
     str += hex[num];
   }
-  console.log(str);
   return str;
 };
 
@@ -239,7 +248,6 @@ const chart = new Chart(ctx, {
 });
 
 function updateChart(title = "money left", value, flag = false) {
-  console.log(amount.innerText);
   const leftIncome =
     Number(amount.innerText) -
     Number(
@@ -274,6 +282,37 @@ function updateChart(title = "money left", value, flag = false) {
   chart.data.datasets[0].backgroundColor = color;
 
   chart.update();
-
-  console.log(graphLabels, graphData);
 }
+
+//go to transaction directly
+
+transaction.addEventListener("click", () => {
+  document.querySelector(".list").scrollIntoView({ behavior: "smooth" });
+  dashboard.classList.remove("active-border-aside");
+  transaction.classList.add("active-border-aside");
+});
+
+//go to dashboard
+
+dashboard.addEventListener("click", () => {
+  document.body.scrollIntoView({ behavior: "smooth" });
+  transaction.classList.remove("active-border-aside");
+  dashboard.classList.add("active-border-aside");
+});
+
+document.querySelector(".heading").addEventListener("click", () => {
+  document.body.scrollIntoView({ behavior: "smooth" });
+  transaction.classList.remove("active-border-aside");
+  dashboard.classList.add("active-border-aside");
+});
+
+//signout
+
+signout.addEventListener("click", () => {
+  successful_login.style.display = "block";
+  successful_login.querySelector("p").innerText = "Successfully Logged Out";
+  setTimeout(() => {
+    successful_login.style.display = "none";
+    window.location.href = "../login-form/signup.html";
+  }, 2000);
+});
