@@ -249,7 +249,7 @@ body {
   border-radius: 0.6em;
   margin-top: 2em;
   width: 60%;
-  max-height: 400px;
+  height: 400px;
 }
 #myChart {
   width: 100%;
@@ -275,9 +275,12 @@ body {
 .tax-calculation {
   width: 90%;
   margin: 0 auto;
+  display: flex;
   background-color: white;
   color: white;
   background-color: #136e12;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 0.6em;
   box-shadow: 0 0.6em 1.2em rgba(8, 8, 8, 0.5);
   height: 4em;
@@ -353,6 +356,12 @@ button:active {
   align-items: center;
   padding: 30px;
   gap: 20px;
+}
+
+.submit-2 {
+  background-color: #587ef4;
+  width: 60%;
+  margin: 1em auto;
 }
 
 @media screen and (max-width: 600px) {

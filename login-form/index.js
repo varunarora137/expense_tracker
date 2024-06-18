@@ -40,6 +40,7 @@ signin.addEventListener("click", (e) => {
       i === input_email_value &&
       input_password_value === temp_obj[i].password
     ) {
+      localStorage.setItem("currentUser", JSON.stringify(temp_obj[i]));
       input_password.value = "";
       input_email.value = "";
       successful_login.style.display = "block";
@@ -68,6 +69,7 @@ signup.addEventListener("click", (e) => {
   obj[newuser_email] = {
     name: newuser_name,
     password: newuser_password,
+    email: newuser_email,
   };
   localStorage.setItem("userData", JSON.stringify(obj));
   user_name.value = "";

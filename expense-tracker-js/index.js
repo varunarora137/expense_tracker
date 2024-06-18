@@ -22,9 +22,62 @@ const dashboard = document.querySelector(".dashboard");
 const ai = document.querySelector(".ai");
 const signout = document.querySelector(".bottom");
 const successful_login = document.querySelector(".successful-login");
-
+const userLoggedIn = document.querySelector(".profile p");
 let idIndex = 0;
 let tempAmount = 0;
+let obj = JSON.parse(localStorage.getItem("currentUser"));
+
+const ctx = document.getElementById("myChart");
+
+const chart = new Chart(ctx, {
+  type: "doughnut",
+  data: {
+    labels: ["demo-chart"],
+    datasets: [
+      {
+        label: "Money In Rupees",
+        data: [1],
+        backgroundColor: color,
+        borderColor: colorGenerator(),
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    // responsive: true,
+    scales: {
+      x: {
+        display: false,
+      },
+      y: {
+        display: false,
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: "right",
+        labels: {
+          boxWidth: 100,
+          padding: 20,
+          usePointStyle: true,
+        },
+      },
+    },
+  },
+});
+
+if (obj.saved === true) {
+  let temp_obj = JSON.parse(localStorage.getItem("userData"));
+  let arr = Object.keys(temp_obj);
+  for (let i of arr) {
+    if (i === obj.email) {
+      productTitle.disabled = false;
+      userAmount.disabled = false;
+      renderTransactions(temp_obj[i].graphLabel, temp_obj[i].graphData);
+    }
+  }
+}
 
 //Set Budget Part
 totalAmountButton.addEventListener("click", () => {
@@ -136,7 +189,7 @@ const modifyElement = (element, edit = false) => {
 };
 
 //Function To Create List
-const listCreator = (expenseName, expenseValue) => {
+function listCreator(expenseName, expenseValue) {
   let sublistContent = document.createElement("div");
   sublistContent.classList.add(
     "sublist-content",
@@ -160,10 +213,8 @@ const listCreator = (expenseName, expenseValue) => {
   });
   sublistContent.appendChild(editButton);
   sublistContent.appendChild(deleteButton);
-  expenseArrTemp.push(sublistContent);
-  expenseArrTotal.push(sublistContent);
   document.getElementById("list").appendChild(sublistContent);
-};
+}
 
 //Function To Add Expenses
 checkAmountButton.addEventListener("click", () => {
@@ -198,54 +249,14 @@ checkAmountButton.addEventListener("click", () => {
 
 //chart
 
-const colorGenerator = () => {
+function colorGenerator() {
   let str = "#";
   for (let i = 1; i <= 6; i++) {
     let num = Math.trunc(Math.random() * 16);
     str += hex[num];
   }
   return str;
-};
-
-const ctx = document.getElementById("myChart");
-
-const chart = new Chart(ctx, {
-  type: "doughnut",
-  data: {
-    labels: ["demo-chart"],
-    datasets: [
-      {
-        label: "Money In Rupees",
-        data: [1],
-        backgroundColor: color,
-        borderColor: colorGenerator(),
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        display: false,
-      },
-      y: {
-        display: false,
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        position: "right",
-        labels: {
-          boxWidth: 100,
-          padding: 20,
-          usePointStyle: true,
-        },
-      },
-    },
-  },
-});
+}
 
 function updateChart(title = "money left", value, flag = false) {
   const leftIncome =
@@ -281,6 +292,12 @@ function updateChart(title = "money left", value, flag = false) {
   color.push(colorGenerator());
   chart.data.datasets[0].backgroundColor = color;
 
+  obj.saved = true;
+  obj.graphLabel = graphLabels;
+  obj.graphData = graphData;
+
+  localStorage.setItem("currentUser", JSON.stringify(obj));
+
   chart.update();
 }
 
@@ -309,6 +326,14 @@ document.querySelector(".heading").addEventListener("click", () => {
 //signout
 
 signout.addEventListener("click", () => {
+  let temp_obj = JSON.parse(localStorage.getItem("userData"));
+  let arr = Object.keys(temp_obj);
+  for (let i of arr) {
+    if (i === obj.email) {
+      temp_obj[i] = obj;
+    }
+  }
+  localStorage.setItem("userData", JSON.stringify(temp_obj));
   successful_login.style.display = "block";
   successful_login.querySelector("p").innerText = "Successfully Logged Out";
   setTimeout(() => {
@@ -316,3 +341,45 @@ signout.addEventListener("click", () => {
     window.location.href = "../login-form/signup.html";
   }, 2000);
 });
+
+//user name display
+
+document.addEventListener("DOMContentLoaded", () => {
+  userLoggedIn.innerText = `${obj.name}`;
+});
+
+//ai integration
+
+ai.addEventListener("click", () => {
+  window.location.href = "../gemini/gemini.html";
+});
+
+//render transactions form localstorage
+
+function renderTransactions(labels, data) {
+  amount.innerText = "₹" + data.reduce((acc, i) => acc + i, 0);
+  tempAmount = data.reduce((acc, i) => acc + i, 0);
+  const expense_sum = data.reduce((acc, i) => acc + i, 0) - data[0];
+  expenditureValue.innerText = "₹" + expense_sum;
+  balanceValue.innerText = "₹" + data[0];
+
+  for (let i = 1; i < data.length; i++) {
+    listCreator(labels[i], data[i]);
+  }
+  updateChart(labels, data);
+}
+
+function updateChart(labels, data) {
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = data;
+
+  let colors = [];
+
+  for (let i = 0; i < data.length; i++) {
+    colors.push(colorGenerator());
+  }
+
+  chart.data.datasets[0].backgroundColor = colors;
+
+  chart.update();
+}

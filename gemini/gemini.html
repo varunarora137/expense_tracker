@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="images/google-gemini-icon.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <title>Gemini</title>
+  </head>
+  <body>
+    <div class="conatiner">
+      <aside class="normal-aside">
+        <div class="head">
+          <button class="bars"><i class="fa-solid fa-bars"></i></button>
+          <button class="plus">+</button>
+        </div>
+        <div class="foot">
+          <button class="help">
+            <i class="fa fa-question-circle" aria-hidden="true"></i></button
+          ><button class="activity">
+            <i class="fa fa-history" aria-hidden="true"></i></button
+          ><button class="setting">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="head-modified">
+          <button class="bars-modified">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <button class="plus-modified">+<span>New chat</span></button>
+        </div>
+        <div class="foot-modified">
+          <button class="help-modified">
+            <i class="fa fa-question-circle" aria-hidden="true"></i
+            ><span>Help</span></button
+          ><button class="activity-modified">
+            <i class="fa fa-history" aria-hidden="true"></i
+            ><span>Activity</span></button
+          ><button class="setting-modified">
+            <i class="fa fa-cog" aria-hidden="true"></i><span>Settings</span>
+          </button>
+          <div class="loc-modified">
+            <div class="online"><i class="fa-solid fa-circle"></i></div>
+            <div class="loc-txt">
+              <p>South Satya Niketan, Satya Niketan,</p>
+              <p>Delhi, India</p>
+              <p class="blue-txt">Based on your places (home) • Update</p>
+              <p class="blue-txt">location</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <div class="temp"></div>
+      <main>
+        <div class="header">
+          <div class="gemini-dropodown-div">
+            <button class="gemini">
+              Gemini<i class="fa fa-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="gemini-dropdown">
+              <div>
+                <img src="images/google-gemini-icon.png" alt="gemini" />Gemini<i
+                  class="fa-solid fa-check"
+                ></i>
+              </div>
+              <div>
+                <img
+                  class="gem-adv"
+                  src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg"
+                />
+                <p class="gem-adv">Gemini Advanced</p>
+                <button class="upgrade">Upgrade</button>
+              </div>
+            </div>
+          </div>
+          <div class="header-2">
+            <button class="advanced">
+              <img
+                src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg"
+              />Try Gemini Advanced
+            </button>
+            <button class="menu">
+              <i class="fas fa-th"></i>
+            </button>
+            <div class="circle-outer"><div class="circle"></div></div>
+          </div>
+        </div>
+        <div class="content-main-outer">
+          <div class="content-main">
+            <h1 class="gradient-text">Hello, Varun</h1>
+            <h1>How can I help you today?</h1>
+            <div class="div-boxes">
+              <div class="box">
+                <p>Help me write a refund email for a product that's damaged</p>
+                <div class="i-circle"><i class="fa-solid fa-pen"></i></div>
+              </div>
+              <div class="box">
+                <p>Provide questions to help me prepare for an interview</p>
+                <div class="i-circle"><i class="fa-solid fa-pen"></i></div>
+              </div>
+              <div class="box">
+                <p>What's the reaction to and impact of autonomous vehicles</p>
+                <div class="i-circle">
+                  <i class="fa-solid fa-lightbulb"></i>
+                </div>
+              </div>
+              <div class="box">
+                <p>Create a list of power phrases for my resume</p>
+                <div class="i-circle"><i class="fa-solid fa-compass"></i></div>
+              </div>
+            </div>
+            <div class="content-footer">
+              <div class="content-footer-content">
+                Humans review some saved chats to improve Google AI. To stop
+                this for future chats, turn off Gemini Apps activity. If this
+                setting is on, don't enter info that you wouldn't want reviewed
+                or used.
+                <a href="">How it works</a>
+                <button class="activity-btn">Manage activity</button
+                ><button class="dismiss">Dismiss</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <input
+            type="text"
+            class="type-ques"
+            placeholder="Enter a prompt here"
+          />
+          <button class="gallery" id="gallery">
+            <i class="fa-solid fa-image"></i></button
+          ><button class="mic" id="mic">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <button class="send" id="send">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+          <p>
+            Gemini may display inaccurate info, including about people, so
+            double-check its responses.
+            <a href="">Your privacy and Gemini Apps</a>
+          </p>
+        </div>
+      </main>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module" src="index.js" defer></script>
+  </body>
+</html>
