@@ -11,6 +11,10 @@ const signin = document.querySelector(".signin");
 const successful_login = document.querySelector(".successful-login");
 const obj = JSON.parse(localStorage.getItem("userData")) || {};
 
+if (localStorage.getItem("flag") === "0") {
+  container.classList.add("active");
+}
+
 registerBtn.addEventListener("click", () => {
   container.classList.add("active");
 });
@@ -76,5 +80,8 @@ signup.addEventListener("click", (e) => {
   user_email.value = "";
   user_password.value = "";
   successful_login.style.display = "block";
-  setTimeout(() => (successful_login.style.display = "none"), 2000);
+  setTimeout(() => {
+    successful_login.style.display = "none";
+    container.classList.remove("active");
+  }, 2000);
 });
