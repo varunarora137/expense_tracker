@@ -2,7 +2,7 @@ let totalAmount = document.getElementById("total-amount");
 let userAmount = document.getElementById("user-amount");
 const checkAmountButton = document.getElementById("check-amount");
 const totalAmountButton = document.getElementById("total-amount-button");
-const productTitle = document.getElementById("product-title");
+let productTitle = document.getElementById("product-title");
 const errorMessage = document.getElementById("budget-error");
 const productTitleError = document.getElementById("product-title-error");
 const productCostError = document.getElementById("product-cost-error");
@@ -10,6 +10,13 @@ const amount = document.getElementById("amount");
 const expenditureValue = document.getElementById("expenditure-value");
 const balanceValue = document.getElementById("balance-amount");
 const list = document.getElementById("list");
+const taxCalculation = document.querySelector(".tax-calculation");
+const taxSubmit = document.querySelector("#total-tax-button");
+const resetTax = document.querySelector("#reset-button");
+const graphLabels = [];
+const graphData = [];
+const color = [];
+const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
 let tempAmount = 0;
 
 //Set Budget Part
@@ -20,12 +27,22 @@ totalAmountButton.addEventListener("click", () => {
     errorMessage.classList.remove("hide");
   } else {
     errorMessage.classList.add("hide");
+    productTitle.disabled = false;
+    userAmount.disabled = false;
     //Set Budget
     amount.innerHTML = tempAmount;
+
     //Set Balance
-    balanceValue.innerText = tempAmount - expenditureValue.innerText;
+    balanceValue.innerText =
+      "₹" +
+      (Number(tempAmount) -
+        Number(
+          expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
+        ));
+
     //Clear Input Box
     totalAmount.value = "";
+    updateChart();
   }
 });
 
@@ -37,28 +54,88 @@ const disableButtons = (bool) => {
   });
 };
 
+//tax calculation
+taxSubmit.addEventListener("click", () => {
+  const temp_income = document.querySelector("#total-income").value;
+  const income = Number(document.querySelector("#total-income").value);
+
+  console.log(temp_income);
+  if (temp_income !== "" && income >= 0) {
+    document.querySelector("#tax-error").classList.add("hide");
+    const taxslab = document.querySelector("#tax-slab");
+    const tax_value = document.querySelector(".stats");
+    taxslab.disabled = false;
+    if (income <= 300000) {
+      taxslab.value = "0%";
+      tax_value.innerText = "Nil";
+    } else if (income > 300000 && income <= 600000) {
+      taxslab.value = "5%";
+      tax_value.innerText = `₹ ${income * 0.05}`;
+    } else if (income > 600000 && income <= tax_value) {
+      taxslab.value = "10%";
+      tax_value.innerText = `₹ ${income * 0.1}`;
+    } else if (income > 900000 && income <= 1200000) {
+      taxslab.value = "15%";
+      tax_value.innerText = `₹ ${income * 0.15}`;
+    } else if (income > 1200000 && income <= 1500000) {
+      taxslab.value = "20%";
+      tax_value.innerText = `₹ ${income * 0.2}`;
+    } else {
+      taxslab.value = "30%";
+      tax_value.innerText = `₹ ${income * 0.3}`;
+    }
+    taxslab.disabled = true;
+  } else {
+    document.querySelector("#tax-error").classList.remove("hide");
+    document.querySelector("#tax-error").classList.add("error");
+    document.querySelector("#tax-slab").value = "";
+    document.querySelector(".stats").innerText = "Nil";
+  }
+});
+
+resetTax.addEventListener("click", () => {
+  document.querySelector("#tax-error").classList.add("hide");
+  document.querySelector("#tax-slab").value = "";
+  document.querySelector("#total-income").value = "";
+  document.querySelector(".stats").innerText = "Nil";
+});
+
 //Function To Modify List Elements
 const modifyElement = (element, edit = false) => {
+  let flag = true;
   let parentDiv = element.parentElement;
-  let currentBalance = balanceValue.innerText;
-  let currentExpense = expenditureValue.innerText;
+  let currentBalance = balanceValue.innerText.slice(
+    1,
+    balanceValue.innerText.length
+  );
+  let currentExpense = expenditureValue.innerText.slice(
+    1,
+    expenditureValue.innerText.length
+  );
   let parentAmount = parentDiv.querySelector(".amount").innerText;
+  let parentText = parentDiv.querySelector(".product").innerText;
   if (edit) {
-    let parentText = parentDiv.querySelector(".product").innerText;
     productTitle.value = parentText;
     userAmount.value = parentAmount;
+    flag = false;
     disableButtons(true);
   }
-  balanceValue.innerText = parseInt(currentBalance) + parseInt(parentAmount);
+  balanceValue.innerText =
+    "₹" + (parseInt(currentBalance) + parseInt(parentAmount));
   expenditureValue.innerText =
-    parseInt(currentExpense) - parseInt(parentAmount);
+    "₹" + (parseInt(currentExpense) - parseInt(parentAmount));
   parentDiv.remove();
+  updateChart(parentText, Number(parentAmount), true);
 };
 
 //Function To Create List
 const listCreator = (expenseName, expenseValue) => {
   let sublistContent = document.createElement("div");
-  sublistContent.classList.add("sublist-content", "flex-space");
+  sublistContent.classList.add(
+    "sublist-content",
+    "flex-space",
+    `${Number(expenseValue) < 0 ? "border-left-red" : "border-left-green"}`
+  );
   list.appendChild(sublistContent);
   sublistContent.innerHTML = `<p class="product">${expenseName}</p><p class="amount">${expenseValue}</p>`;
   let editButton = document.createElement("button");
@@ -88,31 +165,51 @@ checkAmountButton.addEventListener("click", () => {
   //Enable buttons
   disableButtons(false);
   //Expense
+  productTitleError.classList.add("hide");
+
   let expenditure = parseInt(userAmount.value);
   //Total expense (existing + new)
-  let sum = parseInt(expenditureValue.innerText) + expenditure;
-  expenditureValue.innerText = sum;
+  let sum =
+    parseInt(
+      expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
+    ) + expenditure;
+  expenditureValue.innerText = "₹" + sum;
   //Total balance(budget - total expense)
-  const totalBalance = tempAmount - sum;
-  balanceValue.innerText = totalBalance;
+  const totalBalance = Number(tempAmount) - sum;
+  balanceValue.innerText = "₹" + totalBalance;
+
   //Create list
   listCreator(productTitle.value, userAmount.value);
+  updateChart(productTitle.value, Number(userAmount.value));
   //Empty inputs
   productTitle.value = "";
   userAmount.value = "";
 });
 
 //chart
+
+const colorGenerator = () => {
+  let str = "#";
+  for (let i = 1; i <= 6; i++) {
+    let num = Math.trunc(Math.random() * 16);
+    str += hex[num];
+  }
+  console.log(str);
+  return str;
+};
+
 const ctx = document.getElementById("myChart");
 
-new Chart(ctx, {
+const chart = new Chart(ctx, {
   type: "doughnut",
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["demo-chart"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "Money In Rupees",
+        data: [1],
+        backgroundColor: color,
+        borderColor: colorGenerator(),
         borderWidth: 1,
       },
     ],
@@ -140,3 +237,43 @@ new Chart(ctx, {
     },
   },
 });
+
+function updateChart(title = "money left", value, flag = false) {
+  console.log(amount.innerText);
+  const leftIncome =
+    Number(amount.innerText) -
+    Number(
+      expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
+    );
+  title = title.toLowerCase();
+  let ind = -1;
+  graphLabels.forEach((a, i) => {
+    if (a === title) {
+      if (graphData[i] === value || a === "money left") {
+        ind = i;
+      }
+    }
+  });
+  if (flag === true) {
+    graphData.splice(ind, 1);
+    graphLabels.splice(ind, 1);
+  } else {
+    if (ind !== -1) {
+      if (value === undefined) value = leftIncome;
+      graphData[ind] = value;
+    } else {
+      if (value === undefined) value = leftIncome;
+      graphData.push(value);
+      graphLabels.push(title);
+    }
+  }
+  graphData[0] = leftIncome;
+  chart.data.labels = graphLabels;
+  chart.data.datasets[0].data = graphData;
+  color.push(colorGenerator());
+  chart.data.datasets[0].backgroundColor = color;
+
+  chart.update();
+
+  console.log(graphLabels, graphData);
+}
