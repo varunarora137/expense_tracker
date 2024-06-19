@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./asset/dashboard.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>AI</title>
+  </head>
+  <body>
+    <div class="hamburger"><i class="fa-solid fa-bars ham-click"></i></div>
+    <div class="aside">
+      <div class="aside-inside" style="position: relative">
+        <button class="close-div">x</button>
+        <div class="heading" style="cursor: pointer">
+          <img src="asset/svgviewer-png-output (1).png" alt="img" />
+        </div>
+        <div class="top">
+          <div class="profile">
+            <div class="image" style="cursor: pointer">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <p>varun</p>
+          </div>
+          <div class="menu">
+            <div class="dashboard">
+              <img src="asset/dashboard.png" alt="img" />
+              <p>Dashboard</p>
+            </div>
+            <div class="ai active-border-aside">
+              <img src="asset/ai.png" alt="img" />
+              <p>Explore AI</p>
+            </div>
+
+            <div class="transaction">
+              <img src="asset/transaction.png" alt="img" />
+              <p>View All Transactions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <p>Sign Out</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="ans-div">
+        <video autoplay loop muted>
+          <source src="./asset/thinking_emoji.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="question-div">
+        <input type="text" class="text" placeholder="Ask Me Anything...." />
+        <div class="circle">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+    <div class="successful-login">
+      <div class="login-done">
+        <p>Successfully Loggged Out</p>
+        <img src="./asset/tick2.gif" alt="gif" />
+      </div>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

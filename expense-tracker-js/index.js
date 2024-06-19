@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //ai integration
 
 ai.addEventListener("click", () => {
-  window.location.href = "../gemini/gemini.html";
+  window.location.href = "../ai/ai.html";
 });
 
 //render transactions form localstorage

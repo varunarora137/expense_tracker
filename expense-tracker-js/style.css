@@ -96,7 +96,7 @@ body {
 }
 .bottom {
   position: absolute;
-  bottom: 1rem;
+  bottom: 2rem;
   margin: 0;
   margin-left: 1rem;
   width: calc(100% - 1rem);
@@ -410,7 +410,7 @@ button:active {
     visibility: hidden;
   }
   .bottom {
-    bottom: 1rem;
+    bottom: 2rem;
   }
 }
 
@@ -450,7 +450,7 @@ button:active {
     z-index: 5;
   }
   .bottom {
-    bottom: -50px;
+    bottom: -200px;
   }
   .wrapper {
     margin-right: auto;
