@@ -84,6 +84,8 @@ if (obj.saved === true) {
 
 //Set Budget Part
 totalAmountButton.addEventListener("click", () => {
+  console.log("hello");
+
   tempAmount = totalAmount.value;
   //empty or negative input
   if (tempAmount === "" || tempAmount < 0) {
@@ -119,6 +121,7 @@ const disableButtons = (bool) => {
 
 //tax calculation
 taxSubmit.addEventListener("click", () => {
+  console.log("hello");
   const temp_income = document.querySelector("#total-income").value;
   const income = Number(document.querySelector("#total-income").value);
 
