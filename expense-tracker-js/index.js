@@ -47,7 +47,7 @@ const chart = new Chart(ctx, {
     ],
   },
   options: {
-    // responsive: true,
+    responsive: true,
     scales: {
       x: {
         display: false,
@@ -385,3 +385,33 @@ function updateChart(labels, data) {
 
   chart.update();
 }
+
+//hamburger
+
+document.querySelector(".ham-click").addEventListener("click", () => {
+  document.querySelector(".aside").style.width = "16rem";
+  document.querySelector(".hamburger").style.zIndex = "4";
+  document.querySelector(".aside").style.zIndex = "5";
+  setTimeout(() => {
+    document.querySelector(".close-div").style.visibility = "visible";
+    document.querySelector(".bottom").style.bottom = "1rem";
+    document.querySelector(".aside-inside").style.display = "block";
+  }, 200);
+  // document.querySelector(".hamburger").style.display = "none";
+});
+
+document.querySelector(".close-div").addEventListener("click", () => {
+  if (window.innerWidth <= 600) {
+    document.querySelector(".aside").style.width = "40px";
+  } else {
+    document.querySelector(".aside").style.width = "50px";
+  }
+  document.querySelector(".hamburger").style.zIndex = "5";
+  document.querySelector(".aside").style.zIndex = "4";
+  setTimeout(() => {
+    document.querySelector(".bottom").style.bottom = "-50px";
+    document.querySelector(".close-div").style.visibility = "hidden";
+    document.querySelector(".aside-inside").style.display = "none";
+  }, 200);
+  // document.querySelector(".ham-click").style.display = "block";
+});

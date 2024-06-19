@@ -15,10 +15,13 @@ body {
   height: 100vh;
   position: sticky;
   top: 0;
+  bottom: 0;
+  z-index: 10;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
   box-shadow: 0 0.6em 1.2em rgba(28, 0, 80, 1);
   padding-top: 0.5rem;
+  transition: all 0.4s ease-in-out;
 }
 .heading img {
   height: 4rem;
@@ -100,10 +103,11 @@ body {
 }
 
 .wrapper {
-  width: 90%;
   font-size: 16px;
-  max-width: 43.75em;
-  max-width: calc(100vw - 40rem);
+  /* max-width: 43.75em; */
+  /* max-width: calc(100vw - 40rem); */
+  /* max-width: 100%; */
+  width: 60%;
   margin: 2em auto;
 }
 .container {
@@ -364,12 +368,132 @@ button:active {
   margin: 1em auto;
 }
 
+.hamburger {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  width: 50px;
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 0.6em 1.2em rgba(28, 0, 80, 1);
+  display: none;
+}
+.hamburger i {
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin-top: 15px;
+}
+
+.close-div {
+  position: absolute;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1056px) {
+  .hamburger {
+    display: none;
+  }
+  .aside {
+    display: block;
+  }
+  .close-div {
+    visibility: hidden;
+  }
+  .bottom {
+    bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .wrapper {
+    margin-right: 0.5em;
+    margin-left: 1em;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .chart {
+    width: 55%;
+  }
+  .tax-content {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1055px) {
+  .aside {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 4;
+  }
+  .aside-inside {
+    display: none;
+  }
+  .close-div {
+    visibility: visible;
+  }
+  .hamburger {
+    display: block;
+    z-index: 5;
+  }
+  .bottom {
+    bottom: -50px;
+  }
+  .wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .chart-and-content-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .chart {
+    width: 80%;
+    margin: 2em auto 0;
+  }
+  .tax-content {
+    width: 80%;
+    height: 400px;
+    z-index: -2;
+    margin: 2em auto 0;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .wrapper {
     font-size: 14px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
   }
   .sub-container {
     grid-template-columns: 1fr;
     gap: 1em;
+  }
+  .chart {
+    width: 100%;
+  }
+  .tax-content {
+    width: 100%;
+  }
+  .aside {
+    width: 40px;
   }
 }
