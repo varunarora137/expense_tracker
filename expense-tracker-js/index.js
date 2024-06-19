@@ -340,7 +340,7 @@ signout.addEventListener("click", () => {
   }
   localStorage.setItem("userData", JSON.stringify(temp_obj));
   successful_login.style.display = "block";
-  successful_login.querySelector("p").innerText = "Successfully Logged Out";
+  // successful_login.querySelector("p").innerText = "Successfully Logged Out";
   setTimeout(() => {
     successful_login.style.display = "none";
     window.location.href = "../index.html";
