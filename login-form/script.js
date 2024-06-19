@@ -1,20 +1,3 @@
-// const sign_in_btn = document.querySelector("#sign-in-btn");
-// const sign_up_btn = document.querySelector("#sign-up-btn");
-// const container = document.querySelector(".container");
-// const sign_in_btn2 = document.querySelector("#sign-in-btn2");
-// const sign_up_btn2 = document.querySelector("#sign-up-btn2");
-// sign_up_btn.addEventListener("click", () => {
-//   container.classList.add("sign-up-mode");
-// });
-// sign_in_btn.addEventListener("click", () => {
-//   container.classList.remove("sign-up-mode");
-// });
-// sign_up_btn2.addEventListener("click", () => {
-//   container.classList.add("sign-up-mode2");
-// });
-// sign_in_btn2.addEventListener("click", () => {
-//   container.classList.remove("sign-up-mode2");
-// });
 const container = document.getElementById("container");
 const registerBtn = document.getElementById("register");
 const loginBtn = document.getElementById("login");
@@ -26,17 +9,31 @@ const input_password = document.querySelector(".input-password");
 const signup = document.querySelector(".signup");
 const signin = document.querySelector(".signin");
 const successful_login = document.querySelector(".successful-login");
+const sign_in_btn2 = document.querySelector("#sign-in-btn2");
+const sign_up_btn2 = document.querySelector("#sign-up-btn2");
 const obj = JSON.parse(localStorage.getItem("userData")) || {};
 
 if (localStorage.getItem("flag") === "0") {
+  container.classList.add("sign-up-mode2");
   container.classList.add("sign-up-mode");
 }
 
 registerBtn.addEventListener("click", () => {
+  container.classList.add("sign-up-mode2");
   container.classList.add("sign-up-mode");
 });
 
 loginBtn.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode2");
+  container.classList.remove("sign-up-mode");
+});
+
+sign_up_btn2.addEventListener("click", () => {
+  container.classList.add("sign-up-mode2");
+  container.classList.add("sign-up-mode");
+});
+sign_in_btn2.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode2");
   container.classList.remove("sign-up-mode");
 });
 
@@ -106,3 +103,14 @@ signup.addEventListener("click", (e) => {
     container.classList.remove("sign-up-mode");
   }, 2000);
 });
+
+// const sign_in_btn = document.querySelector("#sign-in-btn");
+// const sign_up_btn = document.querySelector("#sign-up-btn");
+// const container = document.querySelector(".container");
+
+// sign_up_btn.addEventListener("click", () => {
+//   container.classList.add("sign-up-mode");
+// });
+// sign_in_btn.addEventListener("click", () => {
+//   container.classList.remove("sign-up-mode");
+// });
