@@ -13,8 +13,8 @@ const list = document.getElementById("list");
 const taxCalculation = document.querySelector(".tax-calculation");
 const taxSubmit = document.querySelector("#total-tax-button");
 const resetTax = document.querySelector("#reset-button");
-const graphLabels = [];
-const graphData = [];
+let graphLabels = [];
+let graphData = [];
 const color = [];
 const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
 const transaction = document.querySelector(".transaction");
@@ -29,10 +29,16 @@ const tax_value = document.querySelector(".stats");
 let idIndex = 0;
 let tempAmount = 0;
 let obj = JSON.parse(localStorage.getItem("currentUser"));
+let transactionClicked = localStorage.getItem("transactionClicked");
+if (transactionClicked === "yes") {
+  dashboard.classList.remove("active-border-aside");
+  transaction.classList.add("active-border-aside");
+  localStorage.setItem("transactionClicked", "no");
+}
 
 const ctx = document.getElementById("myChart");
 
-const chart = new Chart(ctx, {
+let chart = new Chart(ctx, {
   type: "doughnut",
   data: {
     labels: ["demo-chart"],
@@ -247,6 +253,7 @@ checkAmountButton.addEventListener("click", () => {
   //Create list
   listCreator(productTitle.value, userAmount.value);
   updateChart(productTitle.value, Number(userAmount.value));
+  console.log(productTitle.value, Number(userAmount.value));
   //Empty inputs
   productTitle.value = "";
   userAmount.value = "";
@@ -265,10 +272,11 @@ function colorGenerator() {
 
 function updateChart(title = "money left", value, flag = false) {
   const leftIncome =
-    Number(amount.innerText) -
-    Number(
-      expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
-    );
+    Number(amount.innerText) ||
+    tempAmount -
+      Number(
+        expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
+      );
   title = title.toLowerCase();
   let ind = -1;
   graphLabels.forEach((a, i) => {
@@ -291,7 +299,9 @@ function updateChart(title = "money left", value, flag = false) {
       graphLabels.push(title);
     }
   }
-  graphData[0] = leftIncome;
+
+  graphData[0] = leftIncome || graphData[0];
+  console.log(graphData[0], leftIncome);
   chart.data.labels = graphLabels;
   chart.data.datasets[0].data = graphData;
   color.push(colorGenerator());
@@ -302,6 +312,44 @@ function updateChart(title = "money left", value, flag = false) {
   obj.graphData = graphData;
 
   localStorage.setItem("currentUser", JSON.stringify(obj));
+  console.log(graphData, graphLabels);
+  console.log(chart.data.labels, chart.data.datasets[0].data);
+
+  chart.update();
+}
+
+//render transactions form localstorage
+
+function renderTransactions(labels, data) {
+  amount.innerText = "₹" + data.reduce((acc, i) => acc + i, 0);
+  tempAmount = data.reduce((acc, i) => acc + i, 0);
+  const expense_sum = data.reduce((acc, i) => acc + i, 0) - data[0];
+  expenditureValue.innerText = "₹" + expense_sum;
+  balanceValue.innerText = "₹" + data[0];
+
+  for (let i = 1; i < data.length; i++) {
+    listCreator(labels[i], data[i]);
+  }
+  updateChartAgain(labels, data);
+}
+
+function updateChartAgain(labels, data) {
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = data;
+
+  graphData = data;
+  graphLabels = labels;
+
+  let colors = [];
+
+  for (let i = 0; i < data.length; i++) {
+    colors.push(colorGenerator());
+    color.push(colors[i]);
+  }
+
+  chart.data.datasets[0].backgroundColor = colors;
+
+  console.log(graphData, graphLabels);
 
   chart.update();
 }
@@ -358,36 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
 ai.addEventListener("click", () => {
   window.location.href = "../ai/ai.html";
 });
-
-//render transactions form localstorage
-
-function renderTransactions(labels, data) {
-  amount.innerText = "₹" + data.reduce((acc, i) => acc + i, 0);
-  tempAmount = data.reduce((acc, i) => acc + i, 0);
-  const expense_sum = data.reduce((acc, i) => acc + i, 0) - data[0];
-  expenditureValue.innerText = "₹" + expense_sum;
-  balanceValue.innerText = "₹" + data[0];
-
-  for (let i = 1; i < data.length; i++) {
-    listCreator(labels[i], data[i]);
-  }
-  updateChart(labels, data);
-}
-
-function updateChart(labels, data) {
-  chart.data.labels = labels;
-  chart.data.datasets[0].data = data;
-
-  let colors = [];
-
-  for (let i = 0; i < data.length; i++) {
-    colors.push(colorGenerator());
-  }
-
-  chart.data.datasets[0].backgroundColor = colors;
-
-  chart.update();
-}
 
 //hamburger
 

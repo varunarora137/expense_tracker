@@ -16,9 +16,11 @@ var options = {
   },
 };
 pay_now.onclick = function (e) {
-  options.amount = `${Number(tax_value.innerText.slice(1)) * 100}`;
-  options.name = `${JSON.parse(localStorage.getItem("currentUser")).name}`;
-  var rzp1 = new Razorpay(options);
-  rzp1.open();
+  if (Number(tax_value.innerText.slice(1)) > 300000) {
+    options.amount = `${Number(tax_value.innerText.slice(1)) * 100}`;
+    options.name = `${JSON.parse(localStorage.getItem("currentUser")).name}`;
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
   e.preventDefault();
 };

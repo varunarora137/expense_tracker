@@ -51,6 +51,10 @@ document.querySelector(".close-div").addEventListener("click", () => {
 
 //go to dahboard
 
+document.querySelector(".heading").addEventListener("click", () => {
+  window.location.href = "../expense-tracker-js/dashboard.html";
+});
+
 dashboard.addEventListener("click", () => {
   window.location.href = "../expense-tracker-js/dashboard.html";
 });
@@ -58,9 +62,8 @@ dashboard.addEventListener("click", () => {
 //go to transactions
 
 transaction.addEventListener("click", () => {
+  localStorage.setItem("transactionClicked", "yes");
   window.location.href = "../expense-tracker-js/dashboard.html#listed";
-  dashboard.classList.remove("active-border-aside");
-  transaction.classList.add("active-border-aside");
 });
 
 //video hide
