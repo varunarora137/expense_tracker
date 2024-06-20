@@ -14,7 +14,7 @@ A brief description of what this project does and who it's for
 
 The Expense Tracker project is a web application designed to help users manage their personal finances by tracking their
 expenses and incomes. Users can log their transactions, categorize them, and get a clear overview of their financial status.
-The application provides features such as expense logging, graphical representations of spending patterns, tax calculation and budget tracking.
+The application provides features such as expense logging, graphical representations of spending patterns, tax calculation and budget tracking. It also uses local storage to keep track of your expenses.
 
 ## 🎖️ Key Features
 
@@ -43,6 +43,10 @@ The application provides features such as expense logging, graphical representat
 - **Tax Calculation**
 
   - Integrated tax calculator for tax Calculation.
+
+  **Local Storage**
+
+  - Used concept of local storage to keep record of expenses made by each individual user.
 
 ## 🖥️ Technical Stack
 

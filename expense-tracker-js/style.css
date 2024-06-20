@@ -329,10 +329,6 @@ button:active {
   transform: scale(0.9);
 }
 
-/* .div-display {
-  display: none;
-} */
-
 .successful-login {
   width: 100vw;
   height: 100vh;
@@ -358,6 +354,7 @@ button:active {
   font-family: "DM Sans", sans-serif;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 30px;
   gap: 20px;
 }
@@ -516,8 +513,8 @@ button:active {
 
 @media screen and (max-width: 600px) {
   .login-done {
-    font-size: 20px;
-    width: 380px;
+    font-size: 16px;
+    width: 340px;
     height: 50px;
   }
   .warning-modal {

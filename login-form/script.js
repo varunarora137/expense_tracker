@@ -101,6 +101,7 @@ signup.addEventListener("click", (e) => {
   setTimeout(() => {
     successful_login.style.display = "none";
     container.classList.remove("sign-up-mode");
+    container.classList.remove("sign-up-mode2");
   }, 2000);
 });
 

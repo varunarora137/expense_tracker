@@ -8,9 +8,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #c9d6ff;
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  overflow: hidden;
 }
 .container {
   position: relative;
@@ -251,6 +252,7 @@ button:active {
   font-family: "DM Sans", sans-serif;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 30px;
   gap: 20px;
 }
@@ -264,7 +266,7 @@ button:active {
 @media (max-width: 635px) {
   .login-done {
     font-size: 20px;
-    width: 360px;
+    width: 355px;
     height: 50px;
   }
 

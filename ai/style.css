@@ -38,7 +38,6 @@ body {
 }
 .profile {
   display: flex;
-  /* flex-direction: column; */
   padding-left: 1rem;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -61,7 +60,6 @@ body {
   transform: translate(-50%, -50%);
 }
 .profile p {
-  /* font-weight: 600; */
   font-size: 1.2rem;
   padding-top: 0.2rem;
   color: #1b4ad7;
@@ -165,6 +163,7 @@ body {
   height: 8vh;
   font-size: 20px;
   padding-left: 1.5rem;
+  padding-right: 65px;
 }
 
 .text::placeholder {
