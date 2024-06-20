@@ -193,3 +193,8 @@ a {
     width: 23rem;
   }
 }
+@media screen and (max-width: 419px) {
+  main {
+    margin-top: 1.5rem;
+  }
+}

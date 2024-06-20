@@ -3,7 +3,10 @@ var options = {
   currency: "INR", //your business name
   description: "Test Transaction",
 
-  callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+  // callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+  handler: function (response) {
+    alert("Payment Done");
+  },
   prefill: {
     email: "patni@example.com",
     contact: "9000090000", //Provide the customer's phone number for better conversion rates
@@ -16,7 +19,7 @@ var options = {
   },
 };
 pay_now.onclick = function (e) {
-  if (Number(tax_value.innerText.slice(1)) > 300000) {
+  if (tax_value.innerText !== "Nil") {
     options.amount = `${Number(tax_value.innerText.slice(1)) * 100}`;
     options.name = `${JSON.parse(localStorage.getItem("currentUser")).name}`;
     var rzp1 = new Razorpay(options);
