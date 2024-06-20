@@ -44,7 +44,7 @@ The application provides features such as expense logging, graphical representat
 
   - Integrated tax calculator for tax Calculation.
 
-  **Local Storage**
+- **Local Storage**
 
   - Used concept of local storage to keep record of expenses made by each individual user.
 
