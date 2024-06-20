@@ -25,6 +25,7 @@ const successful_login = document.querySelector(".successful-login");
 const userLoggedIn = document.querySelector(".profile p");
 const pay_now = document.querySelector("#pay-now");
 const tax_value = document.querySelector(".stats");
+const close_gif = document.querySelector(".warning-modal img");
 
 let idIndex = 0;
 let tempAmount = 0;
@@ -247,7 +248,13 @@ checkAmountButton.addEventListener("click", () => {
     ) + expenditure;
   expenditureValue.innerText = "₹" + sum;
   //Total balance(budget - total expense)
-  const totalBalance = Number(tempAmount) - sum;
+  let totalBalance = Number(tempAmount) - sum;
+  if (totalBalance < 0) {
+    document.querySelector(".warning-div").style.display = "block";
+    document.body.classList.add("no-scroll");
+    totalBalance = Number(tempAmount);
+    return;
+  }
   balanceValue.innerText = "₹" + totalBalance;
 
   //Create list
@@ -277,6 +284,7 @@ function updateChart(title = "money left", value, flag = false) {
       Number(
         expenditureValue.innerText.slice(1, expenditureValue.innerText.length)
       );
+
   title = title.toLowerCase();
   let ind = -1;
   graphLabels.forEach((a, i) => {
@@ -404,6 +412,14 @@ document.addEventListener("DOMContentLoaded", () => {
 //ai integration
 
 ai.addEventListener("click", () => {
+  let temp_obj = JSON.parse(localStorage.getItem("userData"));
+  let arr = Object.keys(temp_obj);
+  for (let i of arr) {
+    if (i === obj.email) {
+      temp_obj[i] = obj;
+    }
+  }
+  localStorage.setItem("userData", JSON.stringify(temp_obj));
   window.location.href = "../ai/ai.html";
 });
 
@@ -435,4 +451,11 @@ document.querySelector(".close-div").addEventListener("click", () => {
     document.querySelector(".aside-inside").style.display = "none";
   }, 200);
   // document.querySelector(".ham-click").style.display = "block";
+});
+
+//close gif
+
+close_gif.addEventListener("click", () => {
+  close_gif.parentElement.parentElement.style.display = "none";
+  document.body.classList.remove("no-scroll");
 });

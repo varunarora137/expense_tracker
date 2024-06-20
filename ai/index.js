@@ -12,6 +12,7 @@ let i = 0;
 let obj = JSON.parse(localStorage.getItem("currentUser"));
 
 document.querySelector(".profile p").innerText = obj.name;
+
 //gemini
 const API_KEY = "AIzaSyC-e5cQX2Ulywwh1Fx3RPnLONE_NpHatvc";
 
@@ -125,14 +126,6 @@ async function createAns(ques_by_prompt, i) {
 //signout
 
 signout.addEventListener("click", () => {
-  // let temp_obj = JSON.parse(localStorage.getItem("userData"));
-  // let arr = Object.keys(temp_obj);
-  // for (let i of arr) {
-  //   if (i === obj.email) {
-  //     temp_obj[i] = obj;
-  //   }
-  // }
-  // localStorage.setItem("userData", JSON.stringify(temp_obj));
   successful_login.style.display = "block";
   setTimeout(() => {
     successful_login.style.display = "none";
