@@ -8,7 +8,7 @@ A brief description of what this project does and who it's for
 
 ## Hosted Link:
 
-[Expense Tracker](https://varunarora137.github.io/expense_tracker/index.html)
+[Expense Tracker](https://xpnstracker.netlify.app/)
 
 ## 👀 Overview :
 
